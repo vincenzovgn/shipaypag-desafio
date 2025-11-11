@@ -1,6 +1,6 @@
 https://github.com/shipay-pag/tech-challenges/blob/master/back_end/waimea/challenge.md
 
-# Desafio 1
+## Desafio 1
 
 1. Para todas as apis que eu for consulta eu emplementaria uma política de retry exponencial, adotando a "convenção" da comunidade de 3 tentativas e iniciando com 2 segundos, ou seja, se houver a primeira falha, depois de 2 segundos será retrentado, e havendo mais uma falha ele retentará após 4 segundos por conta do exponência que vai utilizar os 2 segundos de delay + 2 segundos da segunda tentativa, essa abordagem vai garantir que eu não envie mais de uma requisição por segundo na API que eu esteja consumindo para evitar qualquer tipo de bloqueio (rate limit) que essa api possa ter. Assim também evitamos sobrecarga nas apis.
 2. Como mencionado acima eu também quero garantir que a minha API não sofra ataques de DDoS, ou seja, a principio eu adicionaria a funcionalidade de rete limit de 3 tentativas por segundo, ou seja, não poderá ter mais de 1 requisição dentro de cada 330 milissegundos, nesse caso eu retornaria o status 429 (To many request) para quem for consumir o recurso.
@@ -9,7 +9,7 @@ https://github.com/shipay-pag/tech-challenges/blob/master/back_end/waimea/challe
 4. Para as duas APIs provedoras de CEP, eu utilizaria a abordagem de chamadas assincronas (promisse) a essas api para obter a resposta da primeira que responder, ao invés aguardar a primária e só acionar a api de CEP segundária caso ela falhe. e utilizaria também a definição do item 1.
 5. Como é uma api de validação posso garantir que deva ter uma persistência e para isso eu utilizaria o PostgreSQL pela sua simplicitade e robustes.
 
-# Desafio 2
+## Desafio 2
 
 Para poder criar uma arquetura mais assertiva vou aferir algumas informações:
 
@@ -34,7 +34,7 @@ Lançamentos de foguetes no ano 45 mil: aproximadamente 3.700 no mês;
 Com esses dados eu não precisaria mudar a arquitetura, pois ela atende bem a mesma abordagem, também podemos levar em consideração um crescimento médio de 15% de lançamentos por anos, ou seja, no 5 ano seriam apróximadamente 78 mil lançamentos por anos ou 3750 por mês. Ainda assim teriamos uma relação de RPS muito baixa ( 0.0025).
 Além disso também não faça sentido nenhum colocar algo armazenamento em cache, já que os lançamentos são unicos e não há a necessidade de consultar eles na aplicação
 
-# Desafio 3
+## Desafio 3
 
 Para os testes eu vou partir do principio que além da quantidade de requisições, há concorrência sobre o banco de dados, mesmo sendo em memmoria (cache) como mostrado no código do projeto.
 Além de garantir que o Kafka é autogerenciado.
@@ -58,3 +58,7 @@ Teste de cargar:
 1. em um ambiente local podemos limitar os recurso do kafka, redis e gerar requisições para verificar os picos de requisições e seus comportamentos de acordo com processamento. Uma informação importante é que não estamos olhando para o
    próximos passos no consumidor outros que possam existir, para isso podemos validar tanto 1 mil requisições por segundos, 2 mil e até 5 mil para entender em qual momento a solução pode sofrer sobrecarga.
 2. em um ambiente de homologação, garantimos que tanto os componentes (kafka, redis e apis) estejam bem configurados, nesse caso testamos o máximo da aplicação com 1 mil requisições por segundo e também podemos enviar progressivamente mais requisções para entender em qual momento a solução pode falhar em uma Cloud com as configurações necessárias.
+
+## Desafio 4
+
+Para o desafio 4, tomei a liberdade de adicionar o projeto anti_patterns dentro do meu respositório e fazer comentários nos diffs só para ficar mais visual
