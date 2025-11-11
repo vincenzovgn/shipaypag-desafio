@@ -84,6 +84,7 @@ Abaixo segue as anotações do code-review do [bot](https://github.com/shipay-pa
 3. [linha16](https://github.com/shipay-pag/tech-challenges/blob/master/back_end/waimea/bot/bot.py#L18) o handler está configurado porém não está sendo definido nenhum formato
 4. [linha19](https://github.com/shipay-pag/tech-challenges/blob/master/back_end/waimea/bot/bot.py#L19) O bot está fazendo o uso de configuração do banco de dados de forma hardcoded, o ideal seria consumir ou obter de um vault para não deixar expostas dados sensíveis ou um arquivo .env e utilizar a biblioteca load_dotenv gerenciar o uso delas
 5. a biblioteca apscheduler eu nunca utilizei porém ao pesquisar vi que o add_job na [linha28](https://github.com/shipay-pag/tech-challenges/blob/master/back_end/waimea/bot/bot.py#L28) está chamando task1(db), o que traz um mal comportamento, o ideal é adicionar o task1 sem executar e deixa para o job através do add_job fazer a execução como trigger, porém vai ser necessário passar como args o db e o logger, que são utilizados na função task1, seguindo a [documentação oficial](https://apscheduler.readthedocs.io/en/3.x/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.add_job)
+6. é importante adicionar ao taks1 tratamento de erro, pois caso ocorra um erro isso não está sendo mapeado ou não será notado
 
 ## Desafio 7
 
