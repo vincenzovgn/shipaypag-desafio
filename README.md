@@ -13,7 +13,7 @@
 
 Abaixo segue desenho da solução:
 
-![Solução desafio Cadastro Cliente - CEP](assets\solucao1-aplicacao-cadastro-cliente-cep.jpg)
+![Solução desafio Cadastro Cliente - CEP](./assets/solucao1-aplicacao-cadastro-cliente-cep.jpg)
 
 ## Desafio 2
 
@@ -42,7 +42,7 @@ Além disso também não faça sentido nenhum colocar algo armazenamento em cach
 
 Abaixo segue desenho da solução:
 
-![Solução desafio Lançamento de foguetes](assets\solucao2-lançamento-foguetes.jpg)
+![Solução desafio Lançamento de foguetes](./assets/solucao2-lançamento-foguetes.jpg)
 
 ## Desafio 3
 
