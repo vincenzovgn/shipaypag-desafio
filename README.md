@@ -72,3 +72,5 @@ Teste de cargar:
 ## Desafio 4
 
 Para o desafio 4, tomei a liberdade de adicionar o projeto anti_patterns dentro do meu respositório e fazer comentários nos diffs só para ficar mais visual
+
+[Veja aqui](https://github.com/vincenzovgn/shipaypag-desafio/commit/2af816c68c0edbac0345f8138d0de58d87ae6e27#diff-97b6e68c0eae60268bc970c87b26ba32900e4425ebfd4bf1d52ba099f6a8c540) o commit com os comentários
