@@ -74,3 +74,18 @@ Teste de cargar:
 Para o desafio 4, tomei a liberdade de adicionar o projeto anti_patterns dentro do meu respositório e fazer comentários nos diffs só para ficar mais visual
 
 [Veja aqui](https://github.com/vincenzovgn/shipaypag-desafio/commit/2af816c68c0edbac0345f8138d0de58d87ae6e27#diff-97b6e68c0eae60268bc970c87b26ba32900e4425ebfd4bf1d52ba099f6a8c540) o commit com os comentários
+
+## Desafio 6
+
+Abaixo segue as anotações do code-review do [bot](https://github.com/shipay-pag/tech-challenges/blob/master/back_end/waimea/bot/bot.py)
+
+1. Separar as responsabilidade em arquivos (modulos).
+2. Há o uso do Flask porém o servidor não é iniciado.
+3. [linha16](https://github.com/shipay-pag/tech-challenges/blob/master/back_end/waimea/bot/bot.py#L18) o handler está configurado porém não está sendo definido nenhum formato
+4. [linha19](https://github.com/shipay-pag/tech-challenges/blob/master/back_end/waimea/bot/bot.py#L19) O bot está fazendo o uso de configuração do banco de dados de forma hardcoded, o ideal seria consumir ou obter de um vault para não deixar expostas dados sensíveis ou um arquivo .env e utilizar a biblioteca load_dotenv gerenciar o uso delas
+5. a biblioteca apscheduler eu nunca utilizei porém ao pesquisar vi que o add_job na [linha28](https://github.com/shipay-pag/tech-challenges/blob/master/back_end/waimea/bot/bot.py#L28) está chamando task1(db), o que traz um mal comportamento, o ideal é adicionar o task1 sem executar e deixa para o job através do add_job fazer a execução como trigger, porém vai ser necessário passar como args o db e o logger, que são utilizados na função task1, seguindo a [documentação oficial](https://apscheduler.readthedocs.io/en/3.x/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.add_job)
+
+## Desafio 7
+
+Partiria do princípios da arquitetura Hexagonal e para cada serviço externo ao invés de chama-los diretamente eu criaria os Adapters que para cada provedor teria sua implementação, além disso utilizaria de factories para poder utilizar o adaptor correto de acordo com a necessidade, e utilizaria o Composer para "compor" todas as instancias em um unico lugar abstraindo a complexidade
+Desta forma eu posso fazer testes unitários e testes de integrações isolados para cada tipo de providers
