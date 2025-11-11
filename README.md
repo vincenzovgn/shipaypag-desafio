@@ -1,4 +1,6 @@
-https://github.com/shipay-pag/tech-challenges/blob/master/back_end/waimea/challenge.md
+# Resoluções para o desafio da Shipay
+
+[shipay-pag](https://github.com/shipay-pag/tech-challenges/blob/master/back_end/waimea/challenge.md)
 
 ## Desafio 1
 
@@ -8,6 +10,10 @@ https://github.com/shipay-pag/tech-challenges/blob/master/back_end/waimea/challe
    Assim também evitar leituras e escritas desnecessárias no Banco de Dados (estou assumindo que tenha), eu implementária um serviço de cache (MainCache, Redis) para evitar consumos desnecessário no banco de dados, quanto nas apis de CEP, assim eu posso garantir uma resposta mais rápida, mas também adicionaria um TTL de 24 horas para cada CNPJ, garantindo que eu também possa evitar um armazenamento alto de Cache e também possibilidando "validar" que o endereço se mantenha iguais após uma outra consulta na API de CEP.
 4. Para as duas APIs provedoras de CEP, eu utilizaria a abordagem de chamadas assincronas (promisse) a essas api para obter a resposta da primeira que responder, ao invés aguardar a primária e só acionar a api de CEP segundária caso ela falhe. e utilizaria também a definição do item 1.
 5. Como é uma api de validação posso garantir que deva ter uma persistência e para isso eu utilizaria o PostgreSQL pela sua simplicitade e robustes.
+
+Abaixo segue desenho da solução:
+
+![Solução desafio Cadastro Cliente - CEP](assets\solucao1-aplicacao-cadastro-cliente-cep.jpg)
 
 ## Desafio 2
 
@@ -33,6 +39,10 @@ Lançamentos de foguetes no ano 45 mil: aproximadamente 3.700 no mês;
 
 Com esses dados eu não precisaria mudar a arquitetura, pois ela atende bem a mesma abordagem, também podemos levar em consideração um crescimento médio de 15% de lançamentos por anos, ou seja, no 5 ano seriam apróximadamente 78 mil lançamentos por anos ou 3750 por mês. Ainda assim teriamos uma relação de RPS muito baixa ( 0.0025).
 Além disso também não faça sentido nenhum colocar algo armazenamento em cache, já que os lançamentos são unicos e não há a necessidade de consultar eles na aplicação
+
+Abaixo segue desenho da solução:
+
+![Solução desafio Lançamento de foguetes](assets\solucao2-lançamento-foguetes.jpg)
 
 ## Desafio 3
 
